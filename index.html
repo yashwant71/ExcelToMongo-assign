@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script defer src="static/client.js"></script>
+    <link rel="stylesheet" href="static/style.css">
+    <script src="https://kit.fontawesome.com/898a3699ac.js" crossorigin="anonymous"></script>
+    <title>excel upload</title>
+  </head>
+<body>
+  <div id="container">
+      <h1>Add candidates to database</h1>
+        <form action="/uploadfile" id="formContainer"enctype="multipart/form-data" method="post">
+          <input type="file" name="uploadfile" id="realChoose" hidden>
+          <label for="realChoose" id="chooseBtn"><i class="fa-solid fa-upload fa-3x"></i></i></label>
+          <div id="fileSelectText">No file Selected</div>
+          <!-- <input type="submit" id="submitBtn" value="Submit"> -->
+          <button id="submitBtn">Submit</button>
+        </form>
+    </div>
+      <!-- <script src="public/client.js"></script> -->
+  </body>
+</html> 
+    <!--  -->
+    <!-- <form action="/uploadfile" enctype="multipart/form-data" accept='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel' method="post"> -->

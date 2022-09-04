@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif;
+
+}
+
+#container{
+    width: 100vw;
+    height: 60vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#formContainer{
+    width: 50vw;
+    height: 40vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid gray
+}
+#chooseBtn{
+    margin: 10px;
+}
+#chooseBtn{
+border: 2px solid black;
+padding: 5px;
+border-radius: 10px;
+}
+#chooseBtn:hover{
+    background-color: rgb(234, 227, 227);
+}
+#submitBtn{
+    margin-top: 30px;
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid gray;
+    background-color: green;
+    color: white;
+    font-weight: bolder;
+    transition: all 0.2s ;
+}
+#submitBtn:hover{
+    background-color: rgb(31, 215, 31);
+}
