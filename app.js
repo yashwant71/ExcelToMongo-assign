@@ -76,8 +76,8 @@ async function generateJSONFile(parsedData, filename) {
     } catch (err) {
         console.error(err)
     }
-}
-async function mongoadd(exceldataparsed,collectionname){
+}   
+async function mongoadd(exceldataparsed,collectionname,){
     const db= await dbconnect();
     col =db.collection(collectionname)
 
@@ -88,13 +88,12 @@ async function mongoadd(exceldataparsed,collectionname){
             callback()
         }
         somefunc(event)
-    }, function(err){
+    }, function(err){   
         if(!err){
             console.log("done insertion! in: ",collectionname);
+            duplicate(col,deleteDuplicates)
         }
     });
-
-    duplicate(col,deleteDuplicates)
 }
 function duplicate(col,callback){
     //for getting duplicates by email
@@ -107,6 +106,7 @@ function duplicate(col,callback){
     count: { $gt : 1 }}}]).toArray()
     .then(res=>{
         // console.log(res.length!=0)
+        console.log(res)
         if(res.length!=0){
             var ids=res[0].docs
             // ids=JSON.stringify(ids);
@@ -126,12 +126,11 @@ async function deleteDuplicates(id,col){
     // {"_id": ObjectId(id)}
     const result =await col.deleteOne({"_id": new mongodb.ObjectId(id)})
     if(result.deletedCount===1){
-        console.log("Successfully deleted one duplicate with id: .");
+        console.log("Successfully deleted one duplicate with id: .",id);
     } else {
       console.log("No documents matched the query. Deleted 0 documents.");
     }
 }
-
 
 var port = process.env.PORT || 4000;
 app.listen(port, () => console.log('http://localhost:' + port + '/'));
