@@ -83,53 +83,26 @@ async function mongoadd(exceldataparsed,collectionname,){
 
     async.eachSeries(exceldataparsed, function (event, callback) {
         async function somefunc(event){
-            const result = await col.insertOne(event)
-            console.log(result)
+            const findit =await col.findOne({Email:event.Email})
+            // console.log(findit)
+                if(findit==null){
+                    async function somefunc2(event){
+                        const result = await col.insertOne(event)
+                        // console.log(result)
+                    }
+                    somefunc2(event)
+                }
+                else{
+                    console.log("skiping... duplicate data with email:",findit.Email)
+                }
             callback()
         }
         somefunc(event)
     }, function(err){   
         if(!err){
             console.log("done insertion! in: ",collectionname);
-            duplicate(col,deleteDuplicates)
         }
     });
-}
-function duplicate(col,callback){
-    //for getting duplicates by email
-    col.aggregate([{ $group: { 
-    _id: { Email: "$Email"},
-    count: { $sum:  1 },
-    docs: { $push: "$_id" }
-    }},
-    { $match: {
-    count: { $gt : 1 }}}]).toArray()
-    .then(res=>{
-        // console.log(res.length!=0)
-        console.log(res)
-        if(res.length!=0){
-            var ids=res[0].docs
-            // ids=JSON.stringify(ids);
-            for(var i=0;i<ids.length-1;i++){
-                // id=JSON.stringify(ids[i])    
-                id=ids[i]
-                callback(id,col)
-            }
-        }
-        else{
-            console.log("no duplicate email found")
-        }
-    })
-}
-
-async function deleteDuplicates(id,col){
-    // {"_id": ObjectId(id)}
-    const result =await col.deleteOne({"_id": new mongodb.ObjectId(id)})
-    if(result.deletedCount===1){
-        console.log("Successfully deleted one duplicate with id: .",id);
-    } else {
-      console.log("No documents matched the query. Deleted 0 documents.");
-    }
 }
 
 var port = process.env.PORT || 4000;
