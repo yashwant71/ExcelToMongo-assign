@@ -8,7 +8,7 @@
 
 ## used softwares/dependencies/libaries/modules are:
 >engine: Nodejs
->ExpressJS ,dotenv ,mongoDB,multer ,xlsx
+>ExpressJS ,dotenv ,mongoDB,multer ,xlsx ,async
 >client :JS ,HTML ,CSS
 
 ## thanks !
